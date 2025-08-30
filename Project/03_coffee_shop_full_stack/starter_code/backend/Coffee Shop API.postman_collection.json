@@ -1,0 +1,125 @@
+{
+  "info": {
+    "name": "Coffee Shop API",
+    "_postman_id": "5f9c6c7a-0000-4000-9000-udacity-coffee",
+    "description": "RBAC test collection for Udacity Coffee Shop Backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://127.0.0.1:5000" },
+    { "key": "barista_token", "value": "" },
+    { "key": "manager_token", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Public",
+      "item": [
+        {
+          "name": "GET /drinks (public)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/drinks"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Barista",
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          { "key": "token", "value": "{{barista_token}}", "type": "string" }
+        ]
+      },
+      "item": [
+        {
+          "name": "GET /drinks",
+          "request": {
+            "auth": { "type": "inherit" },
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/drinks"
+          }
+        },
+        {
+          "name": "GET /drinks-detail",
+          "request": {
+            "auth": { "type": "inherit" },
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/drinks-detail"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Manager",
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          { "key": "token", "value": "{{manager_token}}", "type": "string" }
+        ]
+      },
+      "item": [
+        {
+          "name": "GET /drinks",
+          "request": {
+            "auth": { "type": "inherit" },
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/drinks"
+          }
+        },
+        {
+          "name": "GET /drinks-detail",
+          "request": {
+            "auth": { "type": "inherit" },
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/drinks-detail"
+          }
+        },
+        {
+          "name": "POST /drinks",
+          "request": {
+            "auth": { "type": "inherit" },
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Latte\",\n  \"recipe\": [\n    { \"name\": \"milk\", \"color\": \"white\", \"parts\": 2 },\n    { \"name\": \"espresso\", \"color\": \"brown\", \"parts\": 1 }\n  ]\n}"
+            },
+            "url": "{{base_url}}/drinks"
+          }
+        },
+        {
+          "name": "PATCH /drinks/:id",
+          "request": {
+            "auth": { "type": "inherit" },
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated Drink\"\n}"
+            },
+            "url": "{{base_url}}/drinks/1"
+          }
+        },
+        {
+          "name": "DELETE /drinks/:id",
+          "request": {
+            "auth": { "type": "inherit" },
+            "method": "DELETE",
+            "header": [],
+            "url": "{{base_url}}/drinks/1"
+          }
+        }
+      ]
+    }
+  ]
+}
