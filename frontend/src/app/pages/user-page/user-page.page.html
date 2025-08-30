@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>user-page</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- wenn KEIN Token da ist -->
+<ion-content *ngIf="!auth.token">
+  <ion-button expand="block" (click)="onLogin()">Log In</ion-button>
+</ion-content>
+
+<!-- wenn Token da ist -->
+<ion-content *ngIf="auth.token">
+  <ion-button expand="block" color="danger" (click)="onLogout()">Log Out</ion-button>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Active JWT</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-textarea readonly autoGrow="true"
+        [value]="auth.activeJWT()"
+        style="font-family: monospace; font-size: 12px;">
+      </ion-textarea>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
